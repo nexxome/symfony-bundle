@@ -132,7 +132,11 @@ final class Metadata
     public function toArray(): array
     {
         $metadata = $this->metadata;
-        $metadata['notes'] = $this->notes;
+        if (empty($this->notes)) {
+            unset($metadata['notes']);
+        } else {
+            $metadata['notes'] = $this->notes;
+        }
 
         return $metadata;
     }
