@@ -2,6 +2,39 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 0.13.0
+
+### Added
+
+* Bundle does not work properly with new Intl ICU translations by @snpy in https://github.com/php-translation/symfony-bundle/pull/452
+
+### Fixed
+
+* Symfony Profiler Fix Symfony 6.x compatibility by @krzyc in https://github.com/php-translation/symfony-bundle/pull/488
+
+## 0.12.8
+
+### Fixed
+
+* Fix code styles by @bocharsky-bw in https://github.com/php-translation/symfony-bundle/pull/479
+* Apply changes suggested by PHP CS Fixer by @bocharsky-bw in https://github.com/php-translation/symfony-bundle/pull/486
+
+### Changed
+
+* Upgrade the SymfonyBundleTest by @bocharsky-bw in https://github.com/php-translation/symfony-bundle/pull/481
+
+## 0.12.7
+
+### Fixed
+
+* fix: check if session is available by @robbedg in https://github.com/php-translation/symfony-bundle/pull/478
+
+## 0.12.6
+
+### Fixed
+
+* fix: used finder->exclude instead of notPath for excludedDirs by @seizan8 in https://github.com/php-translation/symfony-bundle/pull/474
+
 ## 0.12.5
 
 ### Added

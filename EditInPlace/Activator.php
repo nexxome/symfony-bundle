@@ -50,10 +50,11 @@ final class Activator implements ActivatorInterface
     /**
      * Get session based on availability.
      */
-    private function getSession(): Session
+    private function getSession(): ?Session
     {
         $session = $this->session;
-        if (null === $session) {
+        $request = $this->requestStack->getCurrentRequest();
+        if (null === $session && $request && $request->hasSession()) {
             $session = $this->requestStack->getSession();
         }
 
@@ -65,7 +66,9 @@ final class Activator implements ActivatorInterface
      */
     public function activate(): void
     {
-        $this->getSession()->set(self::KEY, true);
+        if (null !== $this->getSession()) {
+            $this->getSession()->set(self::KEY, true);
+        }
     }
 
     /**
@@ -73,7 +76,9 @@ final class Activator implements ActivatorInterface
      */
     public function deactivate(): void
     {
-        $this->getSession()->remove(self::KEY);
+        if (null !== $this->getSession()) {
+            $this->getSession()->remove(self::KEY);
+        }
     }
 
     /**
@@ -81,7 +86,7 @@ final class Activator implements ActivatorInterface
      */
     public function checkRequest(Request $request = null): bool
     {
-        if (!$this->getSession()->has(self::KEY)) {
+        if (null === $this->getSession() || !$this->getSession()->has(self::KEY)) {
             return false;
         }
 

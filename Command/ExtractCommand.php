@@ -106,6 +106,7 @@ class ExtractCommand extends Command
             'blacklist_domains' => $config->getBlacklistDomains(),
             'whitelist_domains' => $config->getWhitelistDomains(),
             'project_root' => $config->getProjectRoot(),
+            'new_message_format' => $config->getNewMessageFormat(),
         ]);
         $errors = $result->getErrors();
 
@@ -143,7 +144,7 @@ class ExtractCommand extends Command
         $finder->in($config->getDirs());
 
         foreach ($config->getExcludedDirs() as $exclude) {
-            $finder->notPath($exclude);
+            $finder->exclude($exclude);
         }
 
         foreach ($config->getExcludedNames() as $exclude) {

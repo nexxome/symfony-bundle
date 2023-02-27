@@ -21,15 +21,16 @@ class StatusCommandTest extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->kernel->addConfigFile(__DIR__.'/../app/config/normal_config.yaml');
+
+        $this->testKernel->addTestConfig(__DIR__.'/../app/config/normal_config.yaml');
     }
 
     public function testExecute(): void
     {
-        $this->bootKernel();
-        $application = new Application($this->kernel);
+        $this->testKernel->boot();
+        $application = new Application($this->testKernel);
 
-        $container = $this->getContainer();
+        $container = $this->testKernel->getContainer();
         $application->add($container->get(StatusCommand::class));
 
         $command = $application->find('translation:status');
@@ -54,9 +55,9 @@ class StatusCommandTest extends BaseTestCase
         $this->assertArrayHasKey('new', $total);
         $this->assertArrayHasKey('obsolete', $total);
         $this->assertArrayHasKey('approved', $total);
-        $this->assertEquals(2, $total['defined']);
-        $this->assertEquals(1, $total['new']);
+        $this->assertEquals(4, $total['defined']);
+        $this->assertEquals(2, $total['new']);
         $this->assertEquals(0, $total['obsolete']);
-        $this->assertEquals(1, $total['approved']);
+        $this->assertEquals(2, $total['approved']);
     }
 }
