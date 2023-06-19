@@ -101,7 +101,7 @@ final class Importer
                     $messageDomain = \array_key_exists($key, $resultMessages[$intlDomain] ?? []) ? $intlDomain : $domain;
 
                     $meta = $this->getMetadata($result, $key, $messageDomain);
-                    $meta->setState('new');
+                    //$meta->setState('new');
                     $this->setMetadata($result, $key, $messageDomain, $meta);
 
                     // Add custom translations that we found in the source
