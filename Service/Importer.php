@@ -172,8 +172,8 @@ final class Importer
             if (isset($sourceLocation->getContext()['translation'])) {
                 $meta->addCategory('translation', $sourceLocation->getContext()['translation']);
             }
-            if (isset($sourceLocation->getContext()['editor'])) {
-                $meta->addCategory('editor', $sourceLocation->getContext()['editor']);
+            if (isset($sourceLocation->getContext()['editor']) && $sourceLocation->getContext()['editor']) {
+                $meta->setEditor(true);
             }
             $this->setMetadata($catalogue, $key, $messageDomain, $meta);
         }
