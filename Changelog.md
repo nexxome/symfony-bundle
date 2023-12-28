@@ -2,6 +2,28 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 0.14.2
+
+### Fixed
+
+* Fixed render error in profiler/translation.html.twig (fixes #496) by @althaus in https://github.com/php-translation/symfony-bundle/pull/497
+
+## 0.14.1
+
+### Fixed
+
+* bug: js error use own object extends HTMLElement by @gimler in https://github.com/php-translation/symfony-bundle/pull/493
+
+## 0.14.0
+
+### Fixed
+
+* Remove symfony console $defaultName deprecation by @axi in https://github.com/php-translation/symfony-bundle/pull/491
+
+### Removed
+
+* Dropped PHP 7.2, 7.3, 7.4, and 8.0 support by @axi in https://github.com/php-translation/symfony-bundle/pull/491
+
 ## 0.13.0
 
 ### Added
