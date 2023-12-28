@@ -83,6 +83,7 @@ final class Importer
                     $meta = $this->getMetadata($catalogue, $key, $domain);
                     $meta->removeAllInCategory('file-source');
                     $meta->removeAllInCategory('state');
+                    $meta->removeAllInCategory('editor');
                     $this->setMetadata($catalogue, $key, $domain, $meta);
                 }
             }
