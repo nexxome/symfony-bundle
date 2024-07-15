@@ -19,7 +19,7 @@ use Twig\Node\Expression\ConditionalExpression;
 use Twig\Node\Expression\ConstantExpression;
 use Twig\Node\Expression\FilterExpression;
 use Twig\Node\Node;
-use Twig\NodeVisitor\AbstractNodeVisitor;
+use Twig\NodeVisitor\NodeVisitorInterface;
 
 /**
  * Applies the value of the "desc" filter if the "trans" filter has no
@@ -29,7 +29,7 @@ use Twig\NodeVisitor\AbstractNodeVisitor;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-final class DefaultApplyingNodeVisitor extends AbstractNodeVisitor
+final class DefaultApplyingNodeVisitor implements NodeVisitorInterface
 {
     /**
      * @var bool
@@ -41,7 +41,7 @@ final class DefaultApplyingNodeVisitor extends AbstractNodeVisitor
         $this->enabled = $bool;
     }
 
-    public function doEnterNode(Node $node, Environment $env): Node
+    public function enterNode(Node $node, Environment $env): Node
     {
         if (!$this->enabled) {
             return $node;
@@ -114,7 +114,7 @@ final class DefaultApplyingNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
-    public function doLeaveNode(Node $node, Environment $env): Node
+    public function leaveNode(Node $node, Environment $env): ?Node
     {
         return $node;
     }
