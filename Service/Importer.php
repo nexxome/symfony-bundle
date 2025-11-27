@@ -81,6 +81,7 @@ final class Importer
                     $meta = $this->getMetadata($catalogue, $key, $domain);
                     $meta->removeAllInCategory('file-source');
                     $meta->removeAllInCategory('state');
+                    $meta->removeAllInCategory('editor');
                     $this->setMetadata($catalogue, $key, $domain, $meta);
                 }
             }
@@ -99,7 +100,7 @@ final class Importer
                     $messageDomain = \array_key_exists($key, $resultMessages[$intlDomain] ?? []) ? $intlDomain : $domain;
 
                     $meta = $this->getMetadata($result, $key, $messageDomain);
-                    $meta->setState('new');
+                    //$meta->setState('new');
                     $this->setMetadata($result, $key, $messageDomain, $meta);
 
                     // Add custom translations that we found in the source
@@ -162,12 +163,15 @@ final class Importer
             $trimLength = 1 + \strlen($this->config['project_root']);
 
             $meta = $this->getMetadata($catalogue, $key, $messageDomain);
-            $meta->addCategory('file-source', \sprintf('%s:%s', substr($sourceLocation->getPath(), $trimLength), $sourceLocation->getLine()));
+            //$meta->addCategory('file-source', \sprintf('%s:%s', substr($sourceLocation->getPath(), $trimLength), $sourceLocation->getLine()));
             if (isset($sourceLocation->getContext()['desc'])) {
                 $meta->addCategory('desc', $sourceLocation->getContext()['desc']);
             }
             if (isset($sourceLocation->getContext()['translation'])) {
                 $meta->addCategory('translation', $sourceLocation->getContext()['translation']);
+            }
+            if (isset($sourceLocation->getContext()['editor']) && $sourceLocation->getContext()['editor']) {
+                $meta->setEditor(true);
             }
             $this->setMetadata($catalogue, $key, $messageDomain, $meta);
         }

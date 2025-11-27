@@ -133,4 +133,13 @@ final class CatalogueMessage
 
         return $this->metadata->isApproved();
     }
+
+    public function isEditor(): bool
+    {
+        if (null === $this->metadata) {
+            return false;
+        }
+
+        return $this->metadata->isEditor();
+    }
 }

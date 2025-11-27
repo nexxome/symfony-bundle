@@ -106,6 +106,24 @@ final class Metadata
         $this->addCategory('approved', $bool ? 'true' : 'false');
     }
 
+    public function isEditor(): bool
+    {
+        $notes = $this->getAllInCategory('editor');
+        foreach ($notes as $note) {
+            if (isset($note['content'])) {
+                return 'true' === $note['content'];
+            }
+        }
+
+        return false;
+    }
+
+    public function setEditor(bool $bool): void
+    {
+        $this->removeAllInCategory('editor');
+        $this->addCategory('editor', $bool ? 'true' : 'false');
+    }
+
     public function getSourceLocations(): array
     {
         $sources = [];
@@ -132,7 +150,11 @@ final class Metadata
     public function toArray(): array
     {
         $metadata = $this->metadata;
-        $metadata['notes'] = $this->notes;
+        if (empty($this->notes)) {
+            unset($metadata['notes']);
+        } else {
+            $metadata['notes'] = $this->notes;
+        }
 
         return $metadata;
     }
